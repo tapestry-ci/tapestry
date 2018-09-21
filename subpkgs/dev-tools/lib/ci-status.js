@@ -25,15 +25,16 @@ const logger = tapUtil.logging.devLogger("ci");
 const sameDay = (a, b) =>
   a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getYear() === b.getYear();
 
-// if we ever open source tapestry this will need to be configurable. meanhile this is hardcoded to tapestry in our dev env
+//TODO: this will change soon
 const _BUILD_STATUS_URL_BASE =
-  "https://h4v9hx8c4e.execute-api.us-west-2.amazonaws.com/dev/build-status/load";
+  "https://BUILD-STATUS-URL.execute-api.us-west-2.amazonaws.com/dev/build-status/load";
 const _buildQS = o =>
   Object.keys(o)
     .reduce((m, x) => [...m, `${x}=${encodeURIComponent(o[x])}`], [])
     .join("&");
-const buildStatusUrl = (project, buildStr) =>
-  `${_BUILD_STATUS_URL_BASE}?${_buildQS({ project, build: buildStr })}`;
+// const buildStatusUrl = (project, buildStr) =>
+//  `${_BUILD_STATUS_URL_BASE}?${_buildQS({ project, build: buildStr })}`;
+const buildStatusUrl = (project, buildStr) => { throw new Error("this needs to be refactored! points at old, legacy lambda bs. needs to point at flexible biz"); }
 const loadBuildStatus = (project, buildStr) =>
   fetch
     .json(buildStatusUrl(project, buildStr))
