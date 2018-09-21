@@ -1,0 +1,15 @@
+/Artifacts
+node_modules
+npm-debug.log*
+*.log
+logs
+pids
+*.pid
+*.seed
+/.npm
+.node_repl_history
+.nyc_output
+tapestry.core.json
+.serverless
+.env
+.tags

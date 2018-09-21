@@ -1,0 +1,25 @@
+{
+  service: {
+    name: tapestry
+    description: AWS service provisioning and deployment toolchain
+  }
+
+  environmentTags: {
+    development: ""
+  }
+
+  environmentNpmDistTags: {
+    development: "latest"
+  }
+
+  deployments: {
+    tapestry-ci-tools:  { $template: "$taplib", $name: "ci-tools"  }
+    tapestry-dev-tools: { $template: "$taplib", $name: "dev-tools" }
+    tapestry-util:      { $template: "$taplib", $name: "util"      }
+    tapestry-buildbot:  { $template: "$taplib", $name: "buildbot"  }
+    tapestry-lambdas:   { $template: "$lambda", $root: "lambda"    }
+
+    $taplib: { root: "tapestry-<$name>", type: "npm", files: "**/*" }
+    $lambda: { root: "<$root>", type: "serverless", files: ["**/*js", "serverless.yml"] }
+  }
+}

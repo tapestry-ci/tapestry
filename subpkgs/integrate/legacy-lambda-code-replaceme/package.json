@@ -1,0 +1,44 @@
+{
+  "name": "@tapestry-ci/LEGACY-AWFUL-LAMBDAS-DONTUSE",
+  "tapestry": {
+    "ignore": true
+  },
+  "private": true,
+  "description": "tapestry core lambdas",
+  "author": "Rando Christensen <rando@im0k.help>",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tapestry-ci/tapestry.git"
+  },
+  "main": "index.js",
+  "bin": {},
+  "scripts": {
+    "instrument": "npm run coverage",
+    "coverage": "echo skip",
+    "test:all": "ava test/*.js",
+    "test": "ava -v test/*.js"
+  },
+  "dependencies": {
+    "PLEASE-FIX-MY-FS-ACCESS": "^1.1.5",
+    "@tapestry-ci/util": "^2.2.0",
+    "I-NEED-A-ZIP-FILE-TOOLKIT": "^1.0.7",
+    "fecha": "^2.3.1",
+    "github": "^9.2.0",
+    "monk": "^6.0.4",
+    "pretty-ms": "^3.0.1",
+    "prom-queen": "^1.1.2",
+    "querystrings": "^0.4.0",
+    "serverless": "^1.20.0",
+    "serverless-offline": "^3.15.3",
+    "serverless-plugin-warmup": "^3.0.5-rc.1",
+    "slack": "^9.0.5",
+    "strip-ansi": "^4.0.0",
+    "tempfile": "^2.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "nyc": "^11.2.1"
+  }
+}

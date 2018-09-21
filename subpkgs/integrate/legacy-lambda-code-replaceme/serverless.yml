@@ -1,0 +1,86 @@
+
+THIS WHOLE THING IS HISTORICAL ONLY / GETTING REPLACED / ETC
+
+
+service: tapestry
+
+frameworkVersion: ">=1.7.0 <2.0.0"
+
+provider:
+  name: aws
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: us-west-2
+  runtime: nodejs8.10
+  memorySize: 1024
+  timeout: 300
+  cfLogs: true
+  role: ${self:custom.${self:provider.stage}.role}
+  vpc: ${self:custom.${self:provider.stage}.vpc}
+  environment: ${self:custom.${self:provider.stage}.environment}
+  deploymentBucket: ${self:custom.${self:provider.stage}.deploymentBucket}
+  versionFunctions: false
+
+custom:
+  defaultStage: dev
+
+  dev:
+    deploymentBucket: this-doesnt-matter
+    role: 'arn:aws:iam::BLAH-BLAH-BLAH:role/LAMBDA-Basic-In-VPC'
+    vpc:
+      securityGroupIds:
+        - sg-936558f4
+      subnetIds:
+        - subnet-b46a9ad0
+        - subnet-e26d7995
+        - subnet-88c0e3d1
+    environment:
+      STAGE: dev
+      SLS_DEBUG: '*'
+      DEBUG: 'tapestry:*'
+      TAPESTRY_GITHUB_ACCESS_TOKEN: nope
+      TAPESTRY_SLACK_ACCESS_TOKEN: yup
+      TAPESTRY_SLACK_EVENTS_CHANNEL: "#ci-events"
+      TAPESTRY_CI_CONFIG_LOCATION: '{"Bucket":"CI_CONFIG_BUCKET","Key":"tapestry-ci.config.json","region":"us-west-2"}'
+
+package:
+  individually: true
+  exclude:
+    - "**/*"
+  include:
+    - "node_modules/**/*"
+
+functions:
+  github-ci-webhook:
+    handler: github-ci-webhook/index.handler
+    package:
+      include:
+        - github-ci-webhook/**
+    events:
+      - http:
+          path: webhook/github-ci
+          method: post
+
+#  deploy-serverless:
+#    name: tapestry-deploy-serverless
+#    handler: deploy-serverless/index.handler
+#    package:
+#      include:
+#        - deploy-serverless/**
+
+  build-status:
+    handler: build-status/index.handler
+    package:
+      include:
+        - build-status/**
+    events:
+      - http:
+          path: build-status/load
+          method: get
+
+  build-finished:
+    handler: build-finished/index.handler
+    package:
+      include:
+        - build-finished/**
+    events:
+      - stream: arn:aws:kinesis:us-west-2:BLAH-BLAH-BLAH:stream/tapestry-build-finished

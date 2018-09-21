@@ -1,0 +1,113 @@
+[
+  {
+    "id": "20180907-seperate-docs-builds",
+    "date": "2018-09-07",
+    "desc": "Adding distinct docs build/publish phases",
+    "items": [
+      "  •  added `tapdev build-docs` phase so that docs don't have to be built with code. This is not run as part of normal `tapdev local` unless the `--docs` is passed.",
+      "  •  added build-docs to `tapdev precommit` command.",
+      "  •  CI does build-docs after regular build, and has a new publish-docs step for docs publishing.",
+      "  •  `tapdev ci show` now supports a `--markdown` option, which renders the tapestry build report as a markdown file. This markdown file is also provided to the publish-docs CI step"
+    ]
+  },
+  {
+    "id": "20180830-env-vars-in-build-steps",
+    "date": "2018-08-30",
+    "desc": "`env-vars` phase now happens as part of build",
+    "items": [
+      "  •  `tapdev build` (and the CI equivalent) now does the `env-vars` step as its first step for any package",
+      "  •  `tapdev env-vars` is now an alias for `tapdev build`",
+      "  •  `tapdev local` is now just `tapdev install` + `tapdev doctor`, since install now does `build+env-vars` during installs"
+    ]
+  },
+  {
+    "id": "20180517-shell-command-rewrite",
+    "date": "2018-05-17",
+    "desc": "Revamping shell subcommands used in tapestry commands",
+    "items": [
+      "  •  by default, all subcommand output will be shown within the output of all tapestry commands",
+      "  •  the env var TAPESTRY_HIDE_SHELL_OUTPUT will suppress this output",
+      "  •  this will also apply to tapestry-ci logs, in particular those that you will see when doing `tapdev ci logs [some-build-id]`",
+      "  •  artifacts.zip files from builds should now also contain explicit logs for *every* shell command that was run, including command output, as .json documents",
+      "  •  you can trigger the explicit save of these logs when running locally by setting the env var `TAPESTRY_DEV_SAVE_OUTPUT=/path/to/dir`"
+    ]
+  },
+  {
+    "id": "20180214-doctor-refresh-local-precommit",
+    "date": "2018-02-14",
+    "desc": "updates to `tapdev local`, new commands `tapdev doctor`, `tapdev refresh`, `tapdev precommit`, remove `tapdev link`",
+    "items": [
+      "  •  removed command: `tapdev link` -- this command is no longer necessary with modern npm",
+      "  •  new command: `tapdev doctor` -- attempts to detect errors / problems in tapestry.service.hjson and your node packages",
+      "  •  new command: `tapdev refresh` -- this is `tapdev local` without the install. runs tapdev [build -> env-vars -> doctor]",
+      "  •  new command: `tapdev precommit` -- runs the most complete set of sanity checks, helpful before committing. runs tapdev [install -> build -> env-vars -> doctor -> test] (optionally skipping install)",
+      "  •  updated command: `tapdev local` -- remove `link` and add `doctor`. now does tapdev [install -> build -> env-vars -> doctor]"
+    ]
+  },
+  {
+    "id": "20171106-hooks-and-docbrowser",
+    "date": "2017-11-06",
+    "desc": "new robust tapestry hooks engine and tapdev documentation-browser",
+    "items": [
+      "  •  new command: `tapdev docs [docs-query]` browse tapestry documentation through tapdev. See `tapdev docs tapdev-docs`.",
+      "  •  new hooks engine. tapestry now runs a number of package.json run scripts before/after important tapdev/tapci tasks.",
+      "  •  documentation for new hooks engine. see below and `tapdev docs hooks`"
+    ]
+  },
+  {
+    "id": "20171016-stop-and-rerun",
+    "date": "2017-10-16",
+    "desc": "Added `tapdev ci stop [id]` and `tapdev ci rerun [id]` commands",
+    "items": [
+      "  •  new command: `tapdev ci stop [id]` -- Stop a running build!",
+      "  •  new command: `tapdev ci rerun [id]` -- start a new CI build using identical settings from a previous build",
+      "     •  To use `rerun`, you will need to set the env var TAPESTRY_GITHUB_ACCESS_TOKEN to a valid token. ",
+      "     •  Get yourself a token by going to: github.com -> settings -> developer settings -> personal access tokens"
+    ]
+  },
+  {
+    "id": "20171011-watch-mode",
+    "date":"2017-10-11",
+    "desc": "tapdev ci watch mode",
+    "items": [
+      "  •  all list-mode `tapdev ci` commands now take a --watch/-W option, which makes them loop indefinitely, refreshing the display every 10 seconds",
+      "  •  fixes for tapestry log messages which contain linefeeds, (obscure, but see `tapdev legend` for the cleaned-up output)"
+    ]
+  },
+  {
+    "id": "20171009-slim-debug-vanilla-legend",
+    "date": "2017-10-09",
+    "desc": "makes tapdev much friendlier to non-wide displays / terminal windows",
+    "items": [
+      "  •  width of all tapdev commands was significantly slimmed",
+      "  •  new `--slim` tapdev option (for all commands) takes this to an extreme, for width-limited displays. Can also be triggered by setting TAPESTRY_SLIM_OUTPUT env var",
+      "  •  new `--debug` tapdev option (for all commands) is now an alias for setting DEBUG='tapestry:*' or TAPESTRY_DEBUG='*'. does not (yet) support --debug=pattern",
+      "  •  new `--vanilla` tapdev option (for all commands) simulates the output mode used under CI when running under codebuild",
+      "  •  new `tapdev legend` command for showing example output as modified by debug/slim/vanilla options",
+      "  •  revamp of the news system so it can tell you when there's new features you don't know about!"
+    ]
+  },
+  {
+    "id": "20171006-project-id-refactor",
+    "date": "2017-10-06",
+    "desc": "major updates for `tapdev ci` making dealing with codebuild ids easier",
+    "items": [
+      "  •  output of `tapdev ci` in list modes have changed to show project + id-fragment columns instead of long/ugly codebuild id",
+      "  •  `tapdev ci show` / `tapdev ci logs` / `tapdev ci cloudwatch` / any future  commands which take an id: ",
+      "     •  instead of `tapdev ci command --id foo`, you can drop the '--id' and just call `tapdev ci command foo`",
+      "     •  the `id` parameter no longer needs to be a full codebuild build id.you can now pass an id fragment, and it will find the first build whose id matches this fragment and use that id instead. if multiple match, you can either pass --first or -1 to use the firstmatching result, or a list will be printed of all matching builds."
+    ]
+  },
+  {
+    "id": "20171003-recent-cloudwatch-logs-news",
+    "date": "2017-10-03",
+    "desc": "Adds `tapdev ci recent`, `tapdev ci recent:NNN`, `tapdev ci cloudwatch`, `tapdev ci logs`, and `tapdev news`",
+    "items": [
+      "  •  new command: `tapdev ci recent` for builds that are running or happened within the last 60 minutes",
+      "  •  new command: `tapdev ci recent:NNN` for builds that are running or happened within the last NNN minutes",
+      "  •  new command: `tapdev ci cloudwatch --id project:build-id` to launch cloudwatch logs for a build in the browser",
+      "  •  new command: `tapdev ci logs --id project:build-id` to view logs for a build in the console",
+      "  •  new command: `tapdev news` to show you recently added tapdev features"
+    ]
+  }
+]

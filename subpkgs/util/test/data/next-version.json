@@ -1,0 +1,61 @@
+[
+  {
+    "versions": [ "1.0.0", "1.0.1", "1.1.0", "1.1.1", "1.2.0" ],
+    "tags": ["pre", "rc", ""],
+    "tests": [
+      { "target": "1.2", "expected": { "pre": "1.2.1-pre.0", "rc": "1.2.1-rc.0", "": "1.2.1" }  },
+      { "target": "1.3", "expected": { "pre": "1.3.0-pre.0", "rc": "1.3.0-rc.0", "": "1.3.0" } },
+      { "target": "2.0", "expected": { "pre": "2.0.0-pre.0", "rc": "2.0.0-rc.0", "": "2.0.0" } }
+    ]
+  },
+  {
+    "versions": [ "1.0.0", "1.1.0", "1.2.0", "1.2.1-pre.0", "1.2.1-pre.1", "1.2.1-pre.2", "1.2.1-rc.0" ],
+    "tags": ["pre", "rc", ""],
+    "tests": [
+      { "target": "1.2", "expected": { "pre": "1.2.1-pre.3", "rc": "1.2.1-rc.1", "": "1.2.1" } },
+      { "target": "1.3", "expected": { "pre": "1.3.0-pre.0", "rc": "1.3.0-rc.0", "": "1.3.0" } },
+      { "target": "2.0", "expected": { "pre": "2.0.0-pre.0", "rc": "2.0.0-rc.0", "": "2.0.0" } }
+    ]
+  },
+
+  {
+    "versions": [ "1.0.0", "1.0.1", "1.1.0", "1.1.1", "1.2.0" ],
+    "tags": ["alpha", "beta", ""],
+    "tests": [
+      { "target": "1.2", "expected": { "alpha": "1.2.1-alpha.0", "beta": "1.2.1-beta.0", "": "1.2.1" } },
+      { "target": "1.3", "expected": { "alpha": "1.3.0-alpha.0", "beta": "1.3.0-beta.0", "": "1.3.0" } },
+      { "target": "2.0", "expected": { "alpha": "2.0.0-alpha.0", "beta": "2.0.0-beta.0", "": "2.0.0" } }
+    ]
+  },
+  {
+    "versions": [ "1.0.0", "1.1.0", "1.2.0", "1.2.1-alpha.0", "1.2.1-alpha.1", "1.2.1-alpha.2", "1.2.1-beta.0" ],
+    "tags": ["alpha", "beta", ""],
+    "tests": [
+      { "target": "1.2", "expected": { "alpha": "1.2.1-alpha.3", "beta": "1.2.1-beta.1", "": "1.2.1" } },
+      { "target": "1.3", "expected": { "alpha": "1.3.0-alpha.0", "beta": "1.3.0-beta.0", "": "1.3.0" } },
+      { "target": "2.0", "expected": { "alpha": "2.0.0-alpha.0", "beta": "2.0.0-beta.0", "": "2.0.0" } }
+    ]
+  },
+
+  {
+    "versions": [ "1.0.0", "1.0.1", "1.1.0", "1.1.1", "1.2.0" ],
+    "tags": ["derp", "woohoo", ""],
+    "tests": [
+      { "target": "1.2", "expected": { "derp": "1.2.1-derp.0", "woohoo": "1.2.1-woohoo.0", "": "1.2.1" } },
+      { "target": "1.3", "expected": { "derp": "1.3.0-derp.0", "woohoo": "1.3.0-woohoo.0", "": "1.3.0" } },
+      { "target": "2.0", "expected": { "derp": "2.0.0-derp.0", "woohoo": "2.0.0-woohoo.0", "": "2.0.0" } }
+    ]
+  },
+  {
+    "versions": [ "1.0.0", "1.1.0", "1.2.0", "1.2.1-derp.0", "1.2.1-derp.1", "1.2.1-derp.2", "1.2.1-woohoo.0" ],
+    "tags": ["derp", "woohoo", ""],
+    "tests": [
+      { "target": "1.2", "expected": { "derp": "1.2.1-derp.3", "woohoo": "1.2.1-woohoo.1", "": "1.2.1" } },
+      { "target": "1.3", "expected": { "derp": "1.3.0-derp.0", "woohoo": "1.3.0-woohoo.0", "": "1.3.0" } },
+      { "target": "2.0", "expected": { "derp": "2.0.0-derp.0", "woohoo": "2.0.0-woohoo.0", "": "2.0.0" } }
+    ]
+  }
+
+
+
+]
