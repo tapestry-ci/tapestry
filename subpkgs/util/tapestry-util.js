@@ -8,7 +8,6 @@ module.exports = {
 
   archives: require("./lib/archives"),
   buildInfo: require("./lib/build-info"),
-  buildModes: require("./lib/build-modes"),
   buildStatusUpdates: require("./lib/build-status-updates"),
   ciConfig: require("./lib/ci-config"),
   ciStatus: require("./lib/ci-status"),
